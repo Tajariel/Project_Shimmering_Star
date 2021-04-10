@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    $("#submit").click(function(){
+    $("#login_submit").click(function(){
 
         $.post(
             '../php/connexion.php',

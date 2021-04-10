@@ -26,7 +26,7 @@
 
     const CSS_login_txt_input={
         "font-size":"20px",
-        "color":"#4a4a4a",
+        "color":"white",
         "height":"50px",
         "background":"rgb(60,60,60)",
         "margin-top":".5rem",
@@ -34,6 +34,7 @@
     }
 
     const CSS_login_logo={
+        "display":"inline-block",
         "max-height" : "150px",
         "min-height":"150px",
         "width":"100%",
@@ -41,6 +42,16 @@
         "border-radius": "5px 5px 0px 0px",
         "padding":"0px",
         "margin":"0px",
+    }
+
+    const CSS_submit={
+        "box-shadow": "2px 5px 5px black",
+        "background":"rgb(75,75,75)",
+        "color":"white",
+        "width" :"45%",
+        "margin":"5px",
+        "min-height":"50px",
+        "font-size":"20px", 
     }
 
     const CSS_info_content={
@@ -103,6 +114,10 @@
 
     function loginmaj() {
 
+        //linking login.js for login verification
+        let $body = $("body");
+        $body.append("<script src='js/login.js'></script>")
+
         //hiding navbar link/buttons
         let $navbar = $("#navbar");
         $navbar.css(CSS_navbar_content_hidden);
@@ -114,25 +129,29 @@
 
         //creation of the login form and logo image
         let $login_box=$(".login-box");
-        $login_box.append("<div class='login-logo'></div>");
+        $login_box.append("<div class='login-logo-container'></div>");
         $login_box.append("<div class='login-form'></div>");
         $login_box.css(CSS_login_box)
+        let $login_logo_container=$(".login-logo-container");
+        $login_logo_container.append("<img class='login-logo' src='img/placeholder.gif'>");
         let $login_logo=$(".login-logo");
-        $login_logo.css(CSS_login_logo)
+        $login_logo.css(CSS_login_logo);
 
         //creation of the username entry for the form
         let $login_username_entry = $(".login-form");
         $login_username_entry.append("<input type='text' class='login-txt-input' name='username' placeholder='Username'/>");
         $login_username_entry.append("<input type='text' class='login-txt-input' name='password' placeholder='Password'/>");
-        $login_username_entry.append("<div class='login-btn-container></div>");
+        $login_username_entry.append("<div class='login-btn-container'></div>");
         $login_username_entry.css(CSS_login_form)
         let $login_txt_input = $(".login-txt-input");
         $login_txt_input.css(CSS_login_txt_input);
 
         //creation of the action button
         let $login_btn_container = $(".login-btn-container");
-        $login_btn_container.append("<input type='submit' class='submit' value='Login'>");
-        $login_btn_container.append("<input type='submit' class='submit' value='Register'>")
+        $login_btn_container.append("<input id='login_submit' type='submit' class='submit' value='Login'>");
+        $login_btn_container.append("<input id='register_submit' type='submit' class='submit' value='Register'>")
+        let $login_submit=$(".submit");
+        $login_submit.css(CSS_submit);
         
     }
 
