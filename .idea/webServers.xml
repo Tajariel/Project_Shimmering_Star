@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="bf958d67-e74f-42f7-bf0c-b948190cc1ce" name="shimmeringstar" url="http://ftp-shimmeringstar.alwaysdata.net">
+        <fileTransfer rootFolder="/www" host="ftp-shimmeringstar.alwaysdata.net" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

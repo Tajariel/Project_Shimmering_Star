@@ -4,35 +4,30 @@
         <meta charset='utf-8'/>
         <meta name='theme-color' content='#222222ff'>
         <link rel="stylesheet" href="index.css">
-        <script type="text/javascript" src="nav.js"></script>
         <title>Shimmering Star Game</title>
     </head>
     <body>
         
-        <script src="js/jquery-3.6.0.js"></script>
+        <script src="js/jquery-3.6.0.min.js"></script>
         <script src="js/ContentMaJ.js"></script>
-
-
         <nav id="ssgnav" class="navbar navbar-expand-md fixed-top" style="background-image: linear-gradient(#222222ff 70%,#222222ff,#111111aa);">
             <img src="img/placeholder.gif" width="40" style="transform:scale(1.2,1.2)translate(-8px,1px)"class="d-inline-block align-top">
             <a class="navbar-title" href="#">Shimmering Star Game</a>
             <ul id="navbar">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#home">Acceuil</a>
+                    <a class="nav-link" id="accueil">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#profile">Profile</a>
+                    <a class="nav-link" id="classement">Classement</a>
+                </li>
+                <li class="nav-item">    
+                    <a class="nav-link" id="roulette">Roulette</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#Collection">Collection</a>
-                </li>
-                <li class="nav-item">    
-                    <a class="nav-link" href="#Clicker">Clicker</a>
-                </li>
-                <li class="nav-item">    
-                    <a class="nav-link" href="#Roulette">Roulette</a>
+                    <a class="nav-link" id="disconnect">Déconnexion</a>
                 </li>
             </ul>
+            <div class='money-container'></div>
         </nav>
         <div style="padding-bottom: 60px;"></div>
         <div class="row home-main">

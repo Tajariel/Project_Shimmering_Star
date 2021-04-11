@@ -51,7 +51,8 @@
         "width" :"45%",
         "margin":"5px",
         "min-height":"50px",
-        "font-size":"20px", 
+        "font-size":"20px",
+        "cursor":"pointer", 
     }
 
     const CSS_info_content={
@@ -112,11 +113,54 @@
         "margin-bottom":"10px",
     }
 
-    function loginmaj() {
+    const CSS_money_container={
+        "display": "inline-flex",
+        "flex-direction": "row",
+        "padding": "0px",
+        "height": "100%",
+        "color": "white",
+        "align-self": "flex-end",
+        "align-items":"center",
+    }
 
-        //linking login.js for login verification
-        let $body = $("body");
-        $body.append("<script src='js/login.js'></script>")
+    const CSS_money_value={
+        "color": "white",
+        "text-align": "center",
+        "line-height": "15px",
+        "padding-right":"13px",
+        "display": "block",
+
+    }
+
+    const CSS_money_icon={
+        "width": "40px",
+        "height": "fit-content",
+        "transform": "scale(1.2,1.2)translate(-8px,1px)",
+    }
+
+    const CSS_classement_row={
+        "overflow": "hidden",
+        "display": "flex",
+        "flex-flow": "row",
+        "align-items": "center",
+        "padding": ".5rem 1rem",
+    }
+
+    const CSS_classement_row_item={
+        "color": "white",
+        "text-align": "center",
+        "line-height": "15px",
+        "display": "block",
+        "padding": ".5rem 1rem",
+        "font-size":"30px",
+    }
+    const CSS_roulette_button={
+        
+    }
+
+
+
+    function loginmaj() {
 
         //hiding navbar link/buttons
         let $navbar = $("#navbar");
@@ -139,8 +183,8 @@
 
         //creation of the username entry for the form
         let $login_username_entry = $(".login-form");
-        $login_username_entry.append("<input type='text' class='login-txt-input' name='username' placeholder='Username'/>");
-        $login_username_entry.append("<input type='text' class='login-txt-input' name='password' placeholder='Password'/>");
+        $login_username_entry.append("<input type='text' id='username-input' class='login-txt-input' name='username' placeholder='Username'/>");
+        $login_username_entry.append("<input type='text' id='password-input' class='login-txt-input' name='password' placeholder='Password'/>");
         $login_username_entry.append("<div class='login-btn-container'></div>");
         $login_username_entry.css(CSS_login_form)
         let $login_txt_input = $(".login-txt-input");
@@ -148,11 +192,35 @@
 
         //creation of the action button
         let $login_btn_container = $(".login-btn-container");
-        $login_btn_container.append("<input id='login_submit' type='submit' class='submit' value='Login'>");
-        $login_btn_container.append("<input id='register_submit' type='submit' class='submit' value='Register'>")
+        $login_btn_container.append($("<input id='login-submit' type='submit' class='submit' value='Login'>").click(function(){
+            let $username = $("#username-input");
+            let $password = $("#password-input");
+            login($username.val(),$password.val());
+        }))
+        $login_btn_container.append("<input id='register-submit' type='submit' class='submit' value='Register'>").click(function(){
+            let $username = $("#username-input");
+            let $password = $("#password-input");
+            register($username.val(),$password.val());
+        })
         let $login_submit=$(".submit");
         $login_submit.css(CSS_submit);
         
+    }
+
+    function moneymaj(amount){
+
+        //creation of money value
+        let $money_container=$(".money-container");
+        $money_container.append("<p class='money-value'>"+amount+"</p>");
+        $money_container.css(CSS_money_container);
+        let $money_value=$(".money-value");
+        $money_value.css(CSS_money_value);
+
+        //creation of money icon
+        $money_container.append("<img id='moneyicon'src='../img/moneyicon.png'/>");
+        let $money_icon = $("#moneyicon");
+        $money_icon.css(CSS_money_icon);
+
     }
 
     function accueilmaj(){
@@ -195,11 +263,187 @@
         //creation of content of info-txt-container
         let $info_txt_container = $(".info-txt-container");
         $info_txt_container.append("<li><p class='info-txt'>Ceci est le Shimmering Star Game</p></li>");
-        $info_txt_container.append("<li><p class='info-txt'>Le Shimmering Star Game est un jeu de type Gacha, qui consiste en la collecte de personnage obtenable dans une roulette contre de l'argent. Vous pouvez récupérer de l'argent dans la partie clicker du site et l'utiliser pour améliorer la valeur des personnages que vous possédez déja ou l'utiliser dans la roulette pour obtenir de nouveaux personnages</p></li>");
+        $info_txt_container.append("<li><p class='info-txt'>Le Shimmering Star Game est un jeu de hasard ou vous devez faire tourner une roue pour récupérer de l'argent votre but et d'avoir le plus d'argent parmi tout les participants si vous avez en dessous de 100 gemmes vous avez perdu</p></li>");
         $info_txt_container.css(CSS_info_txt_container);
     }
+
+    function roulettemaj(){
+        //creation of header
+
+        let $ssg_header = $(".ssg-header");
+        $ssg_header.append("<span>Roulette</span>");
+        $ssg_header.append("<div class='ssg-separator'></div>");
+        $ssg_header.css(CSS_ssg_header);
+        let $ssg_separator = $(".ssg-separator");
+        $ssg_separator.css(CSS_ssg_separator);
+
+        //creation of roulette container
+        let $content = $('.home-container');
+        $content.append("<div class='roulette-container'></div>")
+
+        //creation of bid button container
+        let $roulette_container = $('.roulette-container');
+        $roulette_container.append("<div class='bid-container'></div>");
+        $roulette_container.append("<span class='result'></span>");
+        let $result = $('.result');
+
+        //creation of bid button
+        let $bid_container=$('.bid-container');
+        $bid_container.append("<button type='submit' id='low'>100</button>");
+        $bid_container.append("<button type='submit' id='medium'>1000</button>");
+        $bid_container.append("<button type='submit' id='high'>5000</button>")
+
+        function verifymoney(e) {
+            console.log('appellé');
+            $.ajax({
+                url: "../php/api/roulette.php",
+                type:"POST",
+                data: {'bid' : e.currentTarget.id},
+                dataType:"json",
+            })
+                .done(function(data){
+                    let $money_now = data;
+                    $result.empty();
+                    $result.append("Vous possédez maintenant " + $money_now + " Gemmes");
+                    let $money_container = $('.money-container');
+                    $money_container.empty();
+                    moneymaj($money_now);
+                })
+        }
+
+        $('#low').click(verifymoney);
+        $('#medium').click(verifymoney);
+        $('#high').click(verifymoney);
+
+
+
+    }
+
+    function classementmaj(){
+        //creation of header
+        let $ssg_header = $(".ssg-header");
+        $ssg_header.append("<span>Classement</span>");
+        $ssg_header.append("<div class='ssg-separator'></div>");
+        $ssg_header.css(CSS_ssg_header);
+        let $ssg_separator = $(".ssg-separator");
+        $ssg_separator.css(CSS_ssg_separator);
+
+        //creation of leaderboard
+        let $content=$(".home-container");
+        $content.append("<div class='classement-container'></div>");
+
+
+        $.ajax({
+            url: "../php/api/leaderboard.php",
+            type:"GET",
+            dataType:"json",
+        })
+            .done(function(data){
+                console.log(data)
+                for(let $i=0;$i<data.length;$i++){
+
+                    //creation of classement row container
+                    let $classement_container= $(".classement-container");
+                    $classement_container.append("<div class='classement-row'></div>");
+                    let $rank_container_create = $("<div class='rank-container'></div>");
+                    let $username_container_create = $("<div class='username-container'></div>");
+                    let $money_container_create = $("<div class='money-lcontainer'></div>");
+                    //création of classement row
+                    let $classement_row= $(".classement-row");
+                    $classement_row.css(CSS_classement_row);
+                    $classement_row.append($rank_container_create);
+                    $classement_row.append($username_container_create);
+                    $classement_row.append($money_container_create);
+
+                    //création of rank display
+                    $rank_container_create.append("<span class='rank-number'>"+($i+1)+"</span>");
+                    $rank_container_create.css(CSS_classement_row_item);
+
+                    //creation of username display
+                    $username_container_create.append("<span class ='rank-username'>"+data[$i]['username']+"</span>");
+                    $username_container_create.css(CSS_classement_row_item);
+
+                    //creation of money display
+                    $money_container_create.append("<span class='rank-money>'>"+data[$i]['money']+"</span>");
+                    $money_container_create.css(CSS_classement_row_item);
+                }
+
+            })
+    }
+
+    function login(username,password){
+        $.ajax({
+            url: "../php/api/login.php",
+            type:"POST",
+            data: {'username' : username, 'password' : password},
+            dataType:"json",
+        })
+            .done(function(data){
+                if(data["id"] !== undefined) {
+                    $(".home-container").empty();
+                    $(".home-container").css("width","");
+                    $("#navbar").css("display","");
+                    moneymaj(data['money']);
+                    accueilmaj();
+                }else{
+                    loginmaj();
+                }
+            })
+    }
+
+    function register(username,password){
+        if(username == '' || password == ''){
+            alert("Vous devez rentrer un username ET un Mot de passe");
+        }else {
+            $.ajax({
+                url: "../php/api/register.php",
+                type: "POST",
+                data: {'username': username, 'password': password},
+                dataType: "json",
+            })
+        }
+    }
+
+    function disconnectmaj(){
+        $.ajax({
+            url:"../php/api/disconnect.php",
+            type:"POST",
+            dataType:"json,"
+        })
+    }
+
+
     $(()=>{
-        loginmaj();
+        login(undefined,undefined);
+        //controller navbar
+        $('#accueil').click(function(){
+            $('.home-container').empty();
+            $('.ssg-header').empty();
+            accueilmaj();
+        })
+        
+        $('#classement').click(function(){
+            $('.home-container').empty();
+            $('.ssg-header').empty();
+            classementmaj();
+        })
+
+        $('#roulette').click(function(){
+            $('.home-container').empty();
+            $('.ssg-header').empty();
+            roulettemaj();
+        })
+
+        $('#disconnect').click(function(){
+            $('.home-container').empty();
+            $('.ssg-header').empty();
+            $('.money-container').empty();
+            loginmaj();
+            disconnectmaj();
+        })
+
+
 
     })
+
 }) ();

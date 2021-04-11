@@ -10,14 +10,6 @@ body>nav{
     padding-top: 0px!important;
 }
 
-@media screen and (max-width:1200px) {
-    body>nav{
-        min-height: 60px;
-        height: auto;
-        padding-bottom: auto!important;
-        padding-top: 5px!important;
-    }
-}
 
 .navbar-toggler{
     display: none;
@@ -51,6 +43,7 @@ a{
     flex-direction: row;
     padding:0px;
     height: 100%;
+    flex:1;
 }
 
 .nav-link{
@@ -141,7 +134,7 @@ a{
     margin-bottom: 10px;
     margin-top: 10px;
     text-align: left;
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    box-shadow: 0 4px 8px 0 rgba(0 0 0 0.2), 0 6px 20px 0 rgba(0 0 0 0.19);
 }
 
 /*.info-game{
