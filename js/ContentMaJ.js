@@ -159,6 +159,7 @@
         "padding": "5px",
         "display":"inline-block",
         "text-align":"center",
+        "background-color":"#4a4a4a",
     }
 
 
@@ -291,9 +292,11 @@
 
         //creation of bid button
         let $bid_container=$('.bid-container');
-        $bid_container.append("<button type='submit' id='low'>100</button>");
-        $bid_container.append("<button type='submit' id='medium'>1000</button>");
-        $bid_container.append("<button type='submit' id='high'>5000</button>")
+        $bid_container.append("<button type='submit' id='low' class='btnr'>100</button>");
+        $bid_container.append("<button type='submit' id='medium' class='btnr'>1000</button>");
+        $bid_container.append("<button type='submit' id='high' class='btnr'>5000</button>")
+        let $btnr=$('.btnr');
+        $btnr.css(CSS_roulette_button);
 
         function verifymoney(e) {
             console.log('appellé');
@@ -307,6 +310,7 @@
                     let $money_now = data;
                     $result.empty();
                     $result.append("Vous possédez maintenant " + $money_now + " Gemmes");
+                    $result.css("color","white");
                     let $money_container = $('.money-container');
                     $money_container.empty();
                     moneymaj($money_now);

@@ -59,6 +59,7 @@ a{
     display: inline-flex;
     color: white;
     padding-top: 13px;
+    cursor:pointer;
 }
 
 .active{
