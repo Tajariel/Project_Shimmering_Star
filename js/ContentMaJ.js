@@ -155,13 +155,15 @@
         "font-size":"30px",
     }
     const CSS_roulette_button={
-        
+        "margin": "2px 2px",
+        "padding": "5px",
+        "display":"inline-block",
+        "text-align":"center",
     }
 
 
 
     function loginmaj() {
-
         //hiding navbar link/buttons
         let $navbar = $("#navbar");
         $navbar.css(CSS_navbar_content_hidden);
@@ -197,11 +199,11 @@
             let $password = $("#password-input");
             login($username.val(),$password.val());
         }))
-        $login_btn_container.append("<input id='register-submit' type='submit' class='submit' value='Register'>").click(function(){
+        $login_btn_container.append($("<input id='register-submit' type='submit' class='submit' value='Register'>").click(function(){
             let $username = $("#username-input");
             let $password = $("#password-input");
             register($username.val(),$password.val());
-        })
+        }))
         let $login_submit=$(".submit");
         $login_submit.css(CSS_submit);
         
